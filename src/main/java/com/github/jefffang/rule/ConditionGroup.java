@@ -5,8 +5,12 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ConditionGroup extends AbstractCondition {
+    enum GroupOperator {
+        AND, OR;
+    }
+
     private List<Condition> conditions = new ArrayList<>();
-    private ConditionGroupOperator groupOperator;
+    private GroupOperator groupOperator;
 
     public static ConditionGroup all(Condition...conditions) {
         ConditionGroup group = new ConditionGroup();
@@ -21,20 +25,20 @@ public class ConditionGroup extends AbstractCondition {
     }
 
     public ConditionGroup and(Condition...conditions) {
-        groupOperator = ConditionGroupOperator.AND;
+        groupOperator = GroupOperator.AND;
         this.conditions.addAll(Arrays.asList(conditions));
         return this;
     }
 
     public ConditionGroup or(Condition...conditions) {
-        groupOperator = ConditionGroupOperator.OR;
+        groupOperator = GroupOperator.OR;
         this.conditions.addAll(Arrays.asList(conditions));
         return this;
     }
 
     @Override
     protected boolean test(Fact fact) {
-        if (groupOperator == ConditionGroupOperator.AND) {
+        if (groupOperator == GroupOperator.AND) {
             return conditions.stream().allMatch(cond -> cond.satisfy(fact));
         }
         return conditions.stream().anyMatch(cond -> cond.satisfy(fact));
