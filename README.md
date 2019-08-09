@@ -1,5 +1,5 @@
 # java-rule-engine: Rule Engine Libraries for Java
-Java-rule-engine is a simple java based rule engine libraries that supports create rule with condition and actions, also comes with a native rule engine to execute all rules.
+Java-rule-engine is a simple java based rule engine libraries that supports creating rule with conditions and actions, also comes with a native rule engine to execute rules.
 
 ## Dependencies
 
