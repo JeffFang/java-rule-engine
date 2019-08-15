@@ -12,10 +12,11 @@ Java-rule-engine is a simple java based rule engine libraries that supports crea
     Condition female = new SimpleCondition<>("gender", "female");
 
     Condition adult = new RangeCondition<Integer>("age", 18, 100);
+    Condition notAdult = NotCondition.reverse(adult);
 
     Condition maleAdult = ConditionGroup.all(male, adult);
     Condition femaleAdult = ConditionGroup.all(female, adult);
-    Condition maleNotAdult = ConditionGroup.all(male, adult.reverse());
+    Condition maleNotAdult = ConditionGroup.all(male, notAdult);
     Condition adultMaleOrFemale = ConditionGroup.all(ConditionGroup.any(male, female), adult);
 ```
 
