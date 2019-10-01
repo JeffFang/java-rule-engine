@@ -1,24 +1,17 @@
 package com.github.jefffang.rule.condition;
 
-import java.util.Optional;
+import com.github.jefffang.rule.Condition;
 
-import com.github.jefffang.rule.Fact;
+import lombok.RequiredArgsConstructor;
 
-public class RangeCondition<T extends Comparable> extends SingleFieldCondition {
-    private T lowBoundInclusive;
-    private T hiBoundExclusive;
-
-    public RangeCondition(String field, T lowBoundInclusive, T hiBoundExclusive) {
-        super(field);
-        this.lowBoundInclusive = lowBoundInclusive;
-        this.hiBoundExclusive = hiBoundExclusive;
-    }
+@RequiredArgsConstructor
+public class RangeCondition<T extends Comparable<T>> implements Condition<T> {
+    private final T lowBoundInclusive;
+    private final T hiBoundExclusive;
 
     @Override
-    public boolean test(Fact fact) {
-        Optional<T> f = fact(fact);
-        return f.filter(dt -> (lowBoundInclusive == null || dt.compareTo(lowBoundInclusive) >= 0)
-                && (hiBoundExclusive == null || dt.compareTo(hiBoundExclusive) < 0))
-                .isPresent();
+    public boolean test(T fact) {
+        return (lowBoundInclusive == null || fact.compareTo(lowBoundInclusive) >= 0) &&
+        (hiBoundExclusive == null || fact.compareTo(hiBoundExclusive) < 0);
     }
 }

@@ -8,11 +8,11 @@ public class BaseRule<T extends Fact> implements Rule<T> {
     @Getter @Setter private String name;
     @Getter @Setter private int priority;
     @Getter @Setter private boolean exclusive;
-    private Condition condition;
+    private Condition<T> condition;
     private Action<T> action;
 
     @Override
-    public Rule<T> given(@NonNull Condition condition) {
+    public Rule<T> given(@NonNull Condition<T> condition) {
         this.condition = condition;
         return this;
     }
@@ -25,7 +25,7 @@ public class BaseRule<T extends Fact> implements Rule<T> {
 
     @Override
     public boolean evaluate(T fact) {
-        return condition.satisfy(fact);
+        return condition.test(fact);
     }
 
     @Override

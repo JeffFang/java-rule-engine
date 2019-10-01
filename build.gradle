@@ -13,6 +13,7 @@ dependencies {
     implementation 'com.google.guava:guava:26.0-jre'
 
     testImplementation 'junit:junit:4.12'
+    testImplementation 'org.assertj:assertj-core:3.11.1'
     testCompileOnly 'org.projectlombok:lombok:1.18.8'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.8'
 }

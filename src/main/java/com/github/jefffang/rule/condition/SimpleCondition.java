@@ -1,17 +1,17 @@
 package com.github.jefffang.rule.condition;
 
-import com.github.jefffang.rule.Fact;
+import com.github.jefffang.rule.Condition;
 
-public class SimpleCondition<T> extends SingleFieldCondition {
+import lombok.RequiredArgsConstructor;
+
+import java.util.Objects;
+
+@RequiredArgsConstructor
+public class SimpleCondition<T> implements Condition<T> {
     private final T value;
 
-    public SimpleCondition(String field, T value) {
-        super(field);
-        this.value = value;
-    }
-
     @Override
-    public boolean test(Fact fact) {
-        return fact(fact).filter(f -> f.equals(value)).isPresent();
+    public boolean test(T fact) {
+        return Objects.equals(fact, value);
     }
 }

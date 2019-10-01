@@ -3,15 +3,15 @@ package com.github.jefffang.rule;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public class NotCondition extends AbstractCondition {
-    private final Condition condition;
+public class NotCondition<T> implements Condition<T> {
+    private final Condition<T> condition;
 
-    public static Condition reverse(Condition condition) {
-        return new NotCondition(condition);
+    public static <T> Condition reverse(Condition<T> condition) {
+        return new NotCondition<>(condition);
     }
 
     @Override
-    protected boolean test(Fact fact) {
-        return !condition.satisfy(fact);
+    public boolean test(T fact) {
+        return !condition.test(fact);
     }
 }

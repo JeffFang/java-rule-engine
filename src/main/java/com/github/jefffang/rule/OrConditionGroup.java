@@ -1,14 +1,16 @@
 package com.github.jefffang.rule;
 
-public class OrConditionGroup extends ConditionGroup {
+import com.github.jefffang.rule.condition.ConditionGroup;
 
-    public OrConditionGroup or(Condition...conditions) {
-        addConditions(conditions);
+public class OrConditionGroup<T> extends ConditionGroup<T> {
+
+    public OrConditionGroup or(Condition<T> condition) {
+        addCondition(condition);
         return this;
     }
 
     @Override
-    protected boolean test(Fact fact) {
-        return conditions().stream().allMatch(cond -> cond.satisfy(fact));
+    public boolean test(T fact) {
+        return conditions().stream().allMatch(cond -> cond.test(fact));
     }
 }
