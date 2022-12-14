@@ -9,6 +9,6 @@ public class OrConditionGroup extends ConditionGroup {
 
     @Override
     protected boolean test(Fact fact) {
-        return conditions().stream().allMatch(cond -> cond.satisfy(fact));
+        return conditions().stream().anyMatch(cond -> cond.satisfy(fact));
     }
 }
